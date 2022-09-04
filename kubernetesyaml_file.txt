@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: nginx-pod2
+ labels:
+  app: nginx
+ namespace: devops
+spec:
+ containers:
+   - name: nginx
+     image: nginx
+     ports:
+        - containerPort: 80
+
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+ name: nginx-service
+
+spec:
+   selector:
+         app: nginx
+   type: ClusterIP
+   ports:
+         - name: http
+           port: 80
+           targetPort: 80
+           protocol: TCP
+
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+ name: nginx-service
+
+spec:
+   selector:
+         app: nginx
+   type: NodePort
+   ports:
+         - name: http
+           port: 80
+           targetPort: 80
+           nodePort: 30044
